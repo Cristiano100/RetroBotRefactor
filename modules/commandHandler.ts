@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Collection, REST, Routes } from "discord.js";
-import { client } from "../main";
+import { client } from "..";
 const fs = require("fs");
 const path = require("path");
 const { SlashCommandBuilder } = require('@discordjs/builders');
