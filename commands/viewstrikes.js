@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageFlags } = require('discord.js');
 const { isAdmin } = require('../modules/authCheck.ts');
 const { getStrikesByUserId } = require('../types/strike.ts');
-const { timeStampToUnixSeconds } = require('../modules/timeHelper.ts');
+const { timeStampToUnixSeconds, getDiscordFormattedTimeStamp } = require('../modules/timeHelper.ts');
 const { buildSimpleEmbed } = require('../modules/embedHelper.ts');
 const { embedColors } = require('../types/embedColors.ts');
 const { interactionReply, interactionReplyFootnote } = require('../modules/replyHelper.ts');
@@ -40,7 +40,8 @@ module.exports = {
                     if (strike.appeal_date != null) {
                         content += `**:warning: Appealed**\n`;
                     }
-                    content += `- Strike ID: \`${strike.strike_id}\`\n  - Moderator: <@${strike.moderator_id}>\n  - Reason: \`${strike.strike_reason}\`\n  - Date: <t:${timeStampToUnixSeconds(strike.strike_date)}>\n\n`;
+
+                    content += `- Strike ID: \`${strike.strike_id}\`\n  - Moderator: <@${strike.moderator_id}>\n  - Reason: \`${strike.strike_reason}\`\n  - Date: ${await getDiscordFormattedTimeStamp(await timeStampToUnixSeconds(strike.strike_date))}\n\n`;
 
                 }
 
