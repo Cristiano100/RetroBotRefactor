@@ -3,7 +3,6 @@ const { MessageFlags } = require('discord.js');
 const { isAdmin } = require('../modules/authCheck.ts');
 const { getStrikesByUserId } = require('../types/strike.ts');
 const { timeStampToUnixSeconds, getDiscordFormattedTimeStamp } = require('../modules/timeHelper.ts');
-const { buildSimpleEmbed } = require('../modules/embedHelper.ts');
 const { embedColors } = require('../types/embedColors.ts');
 const { interactionReply, interactionReplyFootnote } = require('../modules/replyHelper.ts');
 

@@ -2,7 +2,6 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageFlags } = require('discord.js');
 const { getInvalidPermissionReply, isSupervisor } = require('../modules/authCheck.ts');
 const { deleteStrike } = require('../types/strike.ts');
-const { buildSimpleEmbed } = require('../modules/embedHelper.ts');
 const { embedColors } = require('../types/embedColors.ts');
 const { interactionReply } = require('../modules/replyHelper.ts');
 

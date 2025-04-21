@@ -1,10 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageFlags } = require('discord.js');
 const { isAdmin, getInvalidPermissionReply, isBot, getBotReply, userHasHigherRole } = require('../modules/authCheck.ts');
 const { strikeUser } = require('../types/strike.ts');
-const { buildSimpleEmbed } = require('../modules/embedHelper.ts');
 const { embedColors } = require('../types/embedColors.ts');
-const { interactionReply, dmUser, dmUserWithFootnote } = require('../modules/replyHelper.ts');
+const { interactionReply, dmUserWithFootnote } = require('../modules/replyHelper.ts');
 
 module.exports = {
     data: new SlashCommandBuilder()
