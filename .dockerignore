@@ -7,3 +7,4 @@ docker-compose*
 README.md
 .vscode
 .env
+.github/*
