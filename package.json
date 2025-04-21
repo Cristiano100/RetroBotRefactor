@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bun": "^1.2.9",
+    "chalk": "^5.4.1",
+    "discord.js": "^14.18.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.9"
+  }
+}
