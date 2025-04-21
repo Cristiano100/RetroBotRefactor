@@ -1,0 +1,5 @@
+version: '1'
+services:
+  app:
+    image: ghcr.io/cristiano100/retrobotrefactor/retrobot:main
+    restart: always
