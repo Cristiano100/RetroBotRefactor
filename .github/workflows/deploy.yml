@@ -10,22 +10,22 @@ jobs:
     permissions:
       contents: read
       packages: write
+
     steps:
       - name: Check Out Repository
         uses: actions/checkout@v2
 
-      - name: Login to Github Container Registry
+      - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
         run: |
-          REPO_LOWER=$(echo ${{ github.repostiory}} | tr '[:upper:]' '[:lower:]')
-          BRANCH_NAME=$(echo ${{ github.ref_name}} | tr '[:upper:]' '[:lower:]') # Get the branch name in lowercase
-          docker build . -t ghcr.io/$REPO_LOWER/retrobot:$BRANCH_NAME
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          BRANCH_NAME=$(echo "${{ github.ref_name }}" | tr '[:upper:]' '[:lower:]')
+          docker build . -t ghcr.io/${REPO_LOWER}/retrobot:${BRANCH_NAME}
 
-      - name: Push Docker image to Github Packages
+      - name: Push Docker image to GitHub Packages
         run: |
-          REPO_LOWER=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
-          BRANCH_NAME=$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]') # Get the branch name in lowercase
-          docker push ghcr.io/$REPO_LOWER/retrobot:$BRANCH_NAME
-      
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          BRANCH_NAME=$(echo "${{ github.ref_name }}" | tr '[:upper:]' '[:lower:]')
+          docker push ghcr.io/${REPO_LOWER}/retrobot:${BRANCH_NAME}
