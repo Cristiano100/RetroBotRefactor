@@ -1,18 +1,36 @@
-name: Docker Image CI
+name: Build and Push Docker Image
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  build-and-push:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag retrobot:$(date +%s)
+      - name: Check Out Repository
+        uses: actions/checkout@v2
+
+      - name: Build Project
+        run: |
+          npm install
+          npm run build
+
+      - name: Login to Github Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --pasword-stdin
+
+      - name: Build Docker image
+        run: |
+          REPO_LOWER=$(echo ${{ github.repostiory}} | tr '[:upper:]' '[:lower:]')
+          BRANCH_NAME=$(echo ${{ github.ref_name}} | tr '[:upper:]' '[:lower:]') # Get the branch name in lowercase
+          docker build . -t ghcr.io/$REPO_LOWER/retrobot:$BRANCH_NAME
+
+      - name: Push Docker image to Github Packages
+        run: |
+          REPO_LOWER=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          BRANCH_NAME=$(echo ${{ github.ref_name }} | tr '[:upper:]' '[:lower:]') # Get the branch name in lowercase
+          docker push ghcr.io/$REPO_LOWER/retrobot:$BRANCH_NAME
+      
