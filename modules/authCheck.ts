@@ -37,6 +37,10 @@ export async function isDeveloper(user: User) {
     return userHasRoleWithId(user, "645632252419506222");
 }
 
+export async function isBooster(user: User) {
+    return userHasRoleWithId(user, "666221727411601410");
+}
+
 export async function isBot(user: User) {
     return user.bot;
 }

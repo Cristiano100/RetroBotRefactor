@@ -33,10 +33,10 @@ module.exports = {
             return;
         }
 
-        if (await userHasHigherRole(user, interaction.user)) {
-            await interactionReply(interaction, `You do not have permission to strike ${user} as they have a higher role than you.`, embedColors.error);
-            return;
-        }
+        //if (await userHasHigherRole(user, interaction.user)) {
+        //    await interactionReply(interaction, `You do not have permission to strike ${user} as they have a higher role than you.`, embedColors.error);
+        //    return;
+        //}
 
         if (user == interaction.user && Bun.env.ENVIRONMENT != "dev") {
             await interactionReply(interaction, `You cannot strike yourself.`, embedColors.error);
